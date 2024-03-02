@@ -7,7 +7,7 @@ class inicio_controlador {
     }
 
     public function index(){
-        $this->vista->unir_vistas("empleados/index");
+        $this->vista->unir_vistas("inicio/index");
     }
 }
 
