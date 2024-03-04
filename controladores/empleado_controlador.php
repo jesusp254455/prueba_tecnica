@@ -1,20 +1,20 @@
 <?php 
 
-require_once "modelos/usuario_modelo.php";
+require_once "modelos/empleado_modelo.php";
 
-class usuario_controlador {
+class empleado_controlador {
     public function __construct() {
         $this->vista = new estructura;
      }
  
      public function index(){
-         $this->vista->unir_vistas("usuarios/index");
+         $this->vista->unir_vistas("empleado/index");
      }
 
      public function registrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validar los datos recibidos del formulario
-            $required_fields = ['nombres', 'apellidos', 'email', 'password', 'tipo_usuario'];
+            $required_fields = ['nombres', 'apellidos',  'salario', 'fecha_contratacion', 'email', 'password'];
             foreach ($required_fields as $field) {
                 if (!isset($_POST[$field]) || empty($_POST[$field])) {
                     echo json_encode(array("mensaje" => "Faltan campos requeridos", "icono" => "error"));
@@ -27,15 +27,16 @@ class usuario_controlador {
                 "uid" => uniqid(),
                 "nombres" => $_POST["nombres"],
                 "apellidos" => $_POST["apellidos"],
+                "salario"=> $_POST["salario"],
+                "fecha_contratacion"=> $_POST["fecha_contratacion"],
                 "email" => $_POST["email"],
-                "password" => $_POST["password"],
-                "tipo_usuario" => $_POST["tipo_usuario"],
+                "password" => $_POST["password"], 
                 "photo" => "sddddd",
                 "estado" => 1 // Reemplazar esto con la lógica real para manejar las fotos
             );
     
             // Llamar al método del modelo para registrar al usuario
-            $respuesta = usuario_modelo::registrar($datos);
+            $respuesta = empleado_modelo::registrar($datos);
             if ($respuesta) {
                 echo json_encode(array("mensaje" => "Usuario registrado", "icono" => "success"));
             } else {
@@ -50,7 +51,7 @@ class usuario_controlador {
 
     public function listar(){
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $respuesta = usuario_modelo::listar();
+        $respuesta = empleado_modelo::listar();
         echo json_encode(array("data" => $respuesta));
         }else {
             echo json_encode(array("mensaje" => "Método de solicitud no válido", "icono" => "error"));
@@ -63,7 +64,7 @@ class usuario_controlador {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if(isset($_GET["uid"])) {
                 $uid = $_GET["uid"];
-                $respuesta = usuario_modelo::editar($uid); // Llama a la función de modelo editar()
+                $respuesta = empleado_modelo::editar($uid); // Llama a la función de modelo editar()
                 echo json_encode(array("data" => $respuesta));
             } else {
                 echo json_encode(array("mensaje" => "Parámetro uid no encontrado", "icono" => "error"));
@@ -76,7 +77,7 @@ class usuario_controlador {
     public function actualizar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validar los datos recibidos del formulario
-            $required_fields = ['nombres', 'apellidos', 'email', 'uid', 'tipo_usuario'];
+            $required_fields = ['nombres', 'apellidos', 'salario', 'fecha_contratacion', 'email','uid'];
             foreach ($required_fields as $field) {
                 if (!isset($_POST[$field]) || empty($_POST[$field])) {
                     echo json_encode(array("mensaje" => "Faltan campos requeridos", "icono" => "error"));
@@ -88,13 +89,14 @@ class usuario_controlador {
             $datos = array(
                 "nombres" => $_POST["nombres"],
                 "apellidos" => $_POST["apellidos"],
+                "salario"=> $_POST["salario"],
+                "fecha_contratacion"=> $_POST["fecha_contratacion"],
                 "email" => $_POST["email"],
-                "tipo_usuario" => $_POST["tipo_usuario"],
                 "uid" => $_POST["uid"],
             );
     
             // Llamar al método del modelo para registrar al usuario
-            $respuesta = usuario_modelo::actualizar($datos);
+            $respuesta = empleado_modelo::actualizar($datos);
             if ($respuesta) {
                 echo json_encode(array("mensaje" => "Informacion actualizada", "icono" => "success"));
             } else {
@@ -111,7 +113,7 @@ class usuario_controlador {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if(isset($_GET["uid"])) {
                 $uid = $_GET["uid"];
-                $respuesta = usuario_modelo::eliminar($uid);
+                $respuesta = empleado_modelo::eliminar($uid);
                 if ($respuesta) {
                     echo json_encode(array("mensaje" => "Usuario eliminado", "icono" => "success"));
                 } else {
@@ -123,6 +125,11 @@ class usuario_controlador {
         } else {
             echo json_encode(array("mensaje" => "Método de solicitud no válido", "icono" => "error"));
         }
+    }
+
+
+    public function index2(){
+        $this->vista->unir_vistas("empleado/index");
     }
 }
 

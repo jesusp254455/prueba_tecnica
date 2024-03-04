@@ -1,12 +1,12 @@
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Admin Usuarios</h1>
+        <h1>Admin Empleados</h1>
     </div><!-- End Page Title -->
     <section class="section dashboard">
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Registrar Usuarios
+                    Registrar Empleados
                 </button>
 
                 <div class="table-responsive mt-3 ">
@@ -14,8 +14,10 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Fecha contratacion</th>
+                                <th>Salario</th>
                                 <th>Email</th>
-                                <th>Tipo de usuario</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -39,7 +41,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form action="?controlador=usuario&accion=registrar" id="frm_reg" method="post" enctype="multipart/form-data">
+                    <form action="?controlador=empleado&accion=registrar" id="frm_reg" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="card">
                                 <div class="card-body">
@@ -52,37 +54,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="exampleFormControlInput1" class="form-label">Escoja el tipo de usuario</label>
-                                    <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
-                                        <option selected value="">Seleccione una opción</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Empleado</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1" class="form-label">Digite sus nombres</label>
+                                        <label for="" class="form-label">Digite sus nombres</label>
                                         <input type="text" class="form-control" name="nombres" id="nombres" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Digite sus Apellidos</label>
+                                    <label for="" class="form-label">Digite sus Apellidos</label>
                                     <input type="text" class="form-control" name="apellidos" id="apellidos" required>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1" class="form-label">Digite su Email</label>
+                                        <label for="" class="form-label">Digite el Salario</label>
+                                        <input type="number" class="form-control" name="salario" id="salario" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="" class="form-label">Fecha de contratacion</label>
+                                    <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Digite su Email</label>
                                         <input type="email" class="form-control" name="email" id="email" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Digite su contraseña</label>
+                                    <label for="" class="form-label">Digite su contraseña</label>
                                     <input type="password" class="form-control" name="password" id="password" required>
                                 </div>
                             </div>
@@ -109,7 +113,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form action="?controlador=usuario&accion=actualizar" id="frm_actualizar" method="post" enctype="multipart/form-data">
+                    <form action="?controlador=empleado&accion=actualizar" id="frm_actualizar" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="card">
                                 <div class="card-body">
@@ -122,32 +126,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="exampleFormControlInput1" class="form-label">Escoja el tipo de usuario</label>
-                                    <select class="form-select" id="tipo_usuario_act" name="tipo_usuario" required>
-                                        <option selected value="">Seleccione una opción</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Empleado</option>
-                                    </select>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="" class="form-label">Digite sus nombres</label>
+                                        <input type="text" class="form-control" name="nombres" id="nombres_act" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="" class="form-label">Digite sus Apellidos</label>
+                                    <input type="text" class="form-control" name="apellidos" id="apellidos_act" required>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1" class="form-label">Digite sus nombres</label>
-                                        <input type="text" class="form-control" name="nombres" id="nombres_act" required>
+                                        <label for="" class="form-label">Digite el Salario</label>
+                                        <input type="number" class="form-control" name="salario" id="salario_act" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="exampleFormControlInput1" class="form-label">Digite sus Apellidos</label>
-                                    <input type="text" class="form-control" name="apellidos" id="apellidos_act" required>
+                                    <label for="" class="form-label">Fecha de contratacion</label>
+                                    <input type="date" class="form-control" name="fecha_contratacion" id="fecha_contratacion_act" required>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="exampleFormControlInput1" class="form-label">Digite su Email</label>
+                                        <label for="" class="form-label">Digite su Email</label>
                                         <input type="email" class="form-control" name="email" id="email_act" required>
                                     </div>
                                 </div>
