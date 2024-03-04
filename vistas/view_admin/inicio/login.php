@@ -56,7 +56,7 @@
                     <p class="text-center small">Introduzca su nombre de usuario y contraseña para iniciar sesión</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form class="row g-3 needs-validation" action="?controlador=inicio&accion=ingresar" method="post" id="" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>

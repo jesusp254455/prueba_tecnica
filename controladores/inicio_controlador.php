@@ -15,6 +15,31 @@ class inicio_controlador {
             $this->vista->unir_vistas("inicio/index");
         }
     }
+
+    public function ingresar(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            extract($_POST);
+    
+            $datos["email"] = $_POST["email"];
+            $datos["password"] = $_POST["password"];
+            $r = inicio_modelo::vali($datos);
+            if ($r > 0) {
+                $_SESSION["nombres"] = $r["nombres"];
+                $_SESSION["apellidos"] = $r["apellidos"];
+                $_SESSION["id"] = $r["id"];
+                header("location: ?controlador=inicio&accion=index");
+            } else {
+                echo json_encode(array("mensaje" => "Acceso denegado", "icono" => "error"));
+            }
+            
+        }
+    }
+
+
+    public function salir(){
+        session_destroy();
+        header("location: /prueba_tecnica");
+    }
 }
 
 ?>
