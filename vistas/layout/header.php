@@ -142,6 +142,12 @@
           <span>Usuarios</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link " href="?controlador=usuario&accion=index">
+          <i class="ri-account-box-line" style="font-size:25px;"></i>
+          <span>Projectos</span>
+        </a>
+      </li>
 
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
