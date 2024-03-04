@@ -5,12 +5,20 @@ require_once "modelos/usuario_modelo.php";
 class usuario_controlador{
 
     public function __construct(){
-        $this->vista = new estructura;
+        if(isset($_SESSION["id"])){
+            if ($_SESSION["rol"] == "1") {
+                $this->vista = new estructura;
+            }else{
+                header("location: ?controlador=inicio&accion=index");
+            }
+        }else{
+            header("location: ?controlador=inicio&accion=index");
+        }
     }
 
 
     public function index(){
-
+  
         $this->vista->unir_vistas("usuario/index");
     
     }

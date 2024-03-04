@@ -11,7 +11,8 @@ class inicio_controlador {
         if(!isset($_SESSION["id"])){
             $this->vista->unir_vistas("inicio/login",false);
         }else{
-           
+           $this->vista->info = inicio_modelo::setinformacion($_SESSION["id"]);
+           $this->vista->meses = inicio_modelo::grafica();
             $this->vista->unir_vistas("inicio/index");
         }
     }

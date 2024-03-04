@@ -117,25 +117,30 @@
           <span>Dashboard</span>
         </a>
       </li>
+      <?php if($_SESSION["rol"] == "1") { ?>
       <li class="nav-item">
         <a class="nav-link " href="?controlador=usuario&accion=index">
           <i class="ri-account-box-line" style="font-size:25px;"></i>
           <span>Usuarios</span>
         </a>
       </li>
+      <?php } ?>
+      <?php if($_SESSION["rol"] == "1" || $_SESSION["rol"] == "3") { ?>
       <li class="nav-item">
         <a class="nav-link " href="?controlador=empleado&accion=index2">
           <i class="ri-account-box-line" style="font-size:25px;"></i>
           <span>Empleados</span>
         </a>
       </li>
+      <?php } ?>
+      <?php if($_SESSION["rol"] == "1" || $_SESSION["rol"] == "3" || $_SESSION["rol"] == "2") { ?>
       <li class="nav-item">
         <a class="nav-link " href="?controlador=proyecto&accion=index">
           <i class="ri-account-box-line" style="font-size:25px;"></i>
           <span>Projectos</span>
         </a>
       </li>
-
+      <?php } ?>
 
 
     </ul>

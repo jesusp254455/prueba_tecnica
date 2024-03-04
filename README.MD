@@ -7,4 +7,4 @@ PROYECTO DE PRUEBA TECNICA
 . tener instalado mysql
 
 2 arquitectura
-este proyecto esta hecho en mvc que es modelo vista controlador
+este proyecto esta hecho en mvc que es un patron de arquitectura de software el cual significa modelo vista controlador

@@ -1,9 +1,10 @@
+-- sql paracrear la bd
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-03-2024 a las 05:12:54
+-- Servidor: localhost:3306
+-- Tiempo de generación: 04-03-2024 a las 21:12:43
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -35,8 +36,6 @@ CREATE TABLE `t_empleados` (
   `salario` decimal(10,2) NOT NULL,
   `fecha_contratacion` date DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `password` varchar(256) NOT NULL,
-  `photo` varchar(256) NOT NULL,
   `estado` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,23 +43,11 @@ CREATE TABLE `t_empleados` (
 -- Volcado de datos para la tabla `t_empleados`
 --
 
-INSERT INTO `t_empleados` (`id`, `uid`, `nombres`, `apellidos`, `salario`, `fecha_contratacion`, `email`, `password`, `photo`, `estado`) VALUES
-(23, '65e526abee6a4', 'jesus david', 'peñaranda', 1000000.00, '2024-03-12', 'jpenaranda@gmail.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'sddddd', 1),
-(25, '65e526abee6a5', 'Juan', 'Pérez', 900000.00, '2024-03-12', 'juan.perez@example.com', 'hashed_password', 'photo_url', 1),
-(26, '65e526abee6a6', 'María', 'González', 800000.00, '2024-03-12', 'maria.gonzalez@example.com', 'hashed_password', 'photo_url', 1),
-(27, '65e526abee6a7', 'Pedro', 'López', 700000.00, '2024-03-12', 'pedro.lopez@example.com', 'hashed_password', 'photo_url', 1),
-(28, '65e526abee6a8', 'Ana', 'Martínez', 600000.00, '2024-03-12', 'ana.martinez@example.com', 'hashed_password', 'photo_url', 1),
-(29, '65e526abee6a9', 'Luis', 'Sánchez', 500000.00, '2024-03-12', 'luis.sanchez@example.com', 'hashed_password', 'photo_url', 1),
-(30, '65e526abee6b0', 'Laura', 'Rodríguez', 400000.00, '2024-03-12', 'laura.rodriguez@example.com', 'hashed_password', 'photo_url', 1),
-(31, '65e526abee6b1', 'Carlos', 'Hernández', 300000.00, '2024-03-12', 'carlos.hernandez@example.com', 'hashed_password', 'photo_url', 1),
-(32, '65e526abee6b2', 'Sofía', 'Díaz', 200000.00, '2024-03-12', 'sofia.diaz@example.com', 'hashed_password', 'photo_url', 1),
-(33, '65e526abee6b3', 'Fernando', 'Gómez', 150000.00, '2024-03-12', 'fernando.gomez@example.com', 'hashed_password', 'photo_url', 1),
-(34, '65e526abee6b4', 'Elena', 'Vázquez', 140000.00, '2024-03-12', 'elena.vazquez@example.com', 'hashed_password', 'photo_url', 1),
-(35, '65e526abee6b5', 'Diego', 'Fernández', 130000.00, '2024-03-12', 'diego.fernandez@example.com', 'hashed_password', 'photo_url', 1),
-(36, '65e526abee6b6', 'Carmen', 'Martín', 120000.00, '2024-03-12', 'carmen.martin@example.com', 'hashed_password', 'photo_url', 1),
-(37, '65e526abee6b7', 'Marta', 'Jiménez', 110000.00, '2024-03-12', 'marta.jimenez@example.com', 'hashed_password', 'photo_url', 1),
-(38, '65e526abee6b8', 'Javier', 'Ruiz', 100000.00, '2024-03-12', 'javier.ruiz@example.com', 'hashed_password', 'photo_url', 1),
-(39, '65e545ba8762a', 'juana', 'perez', 20000.00, '2024-03-04', 'admin@example.com', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'sddddd', 1);
+INSERT INTO `t_empleados` (`id`, `uid`, `nombres`, `apellidos`, `salario`, `fecha_contratacion`, `email`, `estado`) VALUES
+(23, '65e526abee6a4', 'jesus david', 'peñaranda', 1000000.00, '2024-03-12', 'jpenaranda@gmail.com', 1),
+(25, '65e526abee6a5', 'Juan', 'Pérez', 900000.00, '2024-03-12', 'juan.perez@example.com', 1),
+(26, '65e526abee6a6', 'María', 'González', 800000.00, '2024-03-12', 'maria.gonzalez@example.com', 1),
+
 
 -- --------------------------------------------------------
 
@@ -82,7 +69,33 @@ CREATE TABLE `t_proyectos` (
 --
 
 INSERT INTO `t_proyectos` (`id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `id_empleado`) VALUES
-(9, 'proyect_1', 'proyecto', '2024-03-07', '2024-03-23', 34);
+(9, 'proyect_1', ' proyecto', '2024-03-18', '2024-03-23', 34),
+(11, 'PROYECTO-2', 'prueba', '2024-03-06', '2024-03-28', 29);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_usuarios`
+--
+
+CREATE TABLE `t_usuarios` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(256) NOT NULL,
+  `nombres` varchar(255) NOT NULL,
+  `correo` varchar(255) NOT NULL,
+  `estado` int(1) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `rol` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_usuarios`
+--
+
+INSERT INTO `t_usuarios` (`id`, `uid`, `nombres`, `correo`, `estado`, `contraseña`, `rol`) VALUES
+(4, '65e5fbbb1a46b', 'administrador', 'administrador@gmail.com', 1, '8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414', 1),
+(5, '65e5fdc112a8a', 'usuario 1', 'usuario@gmail.com', 1, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 2),
+(6, '65e6003b3b6e7', 'editor 1', 'editor@gmail.com', 1, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 3);
 
 --
 -- Índices para tablas volcadas
@@ -102,6 +115,12 @@ ALTER TABLE `t_proyectos`
   ADD KEY `id_empleado` (`id_empleado`);
 
 --
+-- Indices de la tabla `t_usuarios`
+--
+ALTER TABLE `t_usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -109,13 +128,19 @@ ALTER TABLE `t_proyectos`
 -- AUTO_INCREMENT de la tabla `t_empleados`
 --
 ALTER TABLE `t_empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `t_proyectos`
 --
 ALTER TABLE `t_proyectos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `t_usuarios`
+--
+ALTER TABLE `t_usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

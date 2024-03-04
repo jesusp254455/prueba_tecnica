@@ -43,17 +43,6 @@
 
                     <form action="?controlador=empleado&accion=registrar" id="frm_reg" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="mt-2"><strong>Subir foto</strong></h5>
-                                    <div class="container d-flex justify-content-center">
-                                        <label for="subirfoto" class="btn btn-primary">
-                                            <input type="file" id="subirfoto" name="foto" style="display: none;" accept="image/jpeg, image/png, image/gif" required>
-                                            Cargar archivo
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -111,17 +100,6 @@
 
                     <form action="?controlador=empleado&accion=actualizar" id="frm_actualizar" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="mt-2"><strong>Subir foto</strong></h5>
-                                    <div class="container d-flex justify-content-center">
-                                        <label for="subirfoto" class="btn btn-primary">
-                                            <input type="file" id="subirfoto_act" name="foto" style="display: none;" accept="image/jpeg, image/png, image/gif" >
-                                            Cargar archivo
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <div class="form-group">

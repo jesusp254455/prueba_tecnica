@@ -4,7 +4,11 @@ require_once "modelos/empleado_modelo.php";
 class proyecto_controlador {
 
     public function __construct() {
-       $this->vista = new estructura;
+        if(isset($_SESSION["id"])){
+            $this->vista = new estructura;
+            }else{
+                header("location: ?controlador=inicio&accion=index");
+            }
     }
 
     public function index(){
