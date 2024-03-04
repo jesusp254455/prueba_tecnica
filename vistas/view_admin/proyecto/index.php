@@ -8,7 +8,7 @@
                 <a href="?controlador=proyecto&accion=vista_reg" class="btn btn-primary mt-3">
                     Crear Proyectos
                 </a>
-                <div class="row mt-5">
+                <div class="row mt-5" id="imp">
                     
                 </div>
             </div>

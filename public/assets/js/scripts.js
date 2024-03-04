@@ -192,9 +192,6 @@ $("#fr_regpro").submit(async function (event) {
             );
             if (respuestda.icono === "success") {
                 $("#fr_regpro").trigger("reset")
-            setTimeout(function() {
-                window.location.href = "?controlador=proyecto&accion=index";
-              }, 3000);
             }
            
         } else {
@@ -221,18 +218,26 @@ async function listar_proyectos() {
                 return `
                 <div class="col-md-4">
                 <div class="card">
+                <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
+                  <li><a class="dropdown-item" href="?controlador=proyecto&accion=editar&id=${x.id}">Editar</a></li>
+                  <li><a class="dropdown-item" class="eliminar" href="?controlador=proyecto&accion=eliminar&id=${x.id}">Eliminar</a></li>
+                </ul>
+              </div>
                     <div class="card-body">
                         <h5 class="card-title">${x.nombre}</h5>
                         <p class="card-text">${x.descripcion}</p>
                         <p class="card-text"><strong>Fecha de inicio:</strong>${x.fecha_inicio}</p>
                         <p class="card-text"><strong>Fecha de fin:</strong>${x.fecha_fin}</p>
                         <p class="card-text"><strong>ID Empleado:</strong>${x.id_empleado}</p>
+                        
                     </div>
                 </div>
             </div>
                 `;
             });
-            $("#").html();
+            $("#imp").html(carta);
         }
     } catch (error) {
         console.error("Error en la solicitud:", error);
@@ -242,3 +247,39 @@ $(document).ready(function () {
     listar();
     listar_proyectos();
 });
+
+$("#fr_actpro").submit(async function (event) {
+    event.preventDefault(); // Evitar el envío automático del formulario
+    let url = $(this).attr("action");
+    let data = $(this).serialize();
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        if (response.ok) {
+            let respuestda = await response.json();
+            Swal.fire(
+                respuestda.mensaje,
+                '',
+                respuestda.icono
+            );
+            if (respuestda.icono === "success") {
+            setTimeout(function() {
+                window.location.href = "?controlador=proyecto&accion=index";
+              }, 3000);
+            }
+           
+        } else {
+            console.error("Error en la solicitud");
+            // Aquí puedes manejar errores específicos según la respuesta del servidor
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        // Aquí puedes manejar errores de conexión, etc.
+    }
+});
+

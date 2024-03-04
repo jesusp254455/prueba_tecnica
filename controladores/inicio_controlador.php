@@ -7,7 +7,13 @@ class inicio_controlador {
     }
 
     public function index(){
-        $this->vista->unir_vistas("inicio/index");
+       
+        if(!isset($_SESSION["id"])){
+            $this->vista->unir_vistas("inicio/login",false);
+        }else{
+           
+            $this->vista->unir_vistas("inicio/index");
+        }
     }
 }
 

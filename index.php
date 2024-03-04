@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "recursos/rutas.php";
 require_once "recursos/conexion.php";
 require_once "recursos/estructura.php";

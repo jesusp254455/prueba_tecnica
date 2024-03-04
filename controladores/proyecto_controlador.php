@@ -66,8 +66,9 @@ class proyecto_controlador {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if(isset($_GET["id"])) {
                 $id = $_GET["id"];
-                $respuesta = proyecto_modelo::editar($id);
-                echo json_encode(array("data" => $respuesta));
+                $this->vista->datos = proyecto_modelo::editar($id);
+                $this->vista->empleados = empleado_modelo::listar();
+                $this->vista->unir_vistas("proyecto/editar");
             } else {
                 echo json_encode(array("mensaje" => "Parámetro id no encontrado", "icono" => "error"));
             }
@@ -115,7 +116,7 @@ class proyecto_controlador {
                 $id = $_GET["id"];
                 $respuesta = proyecto_modelo::eliminar($id);
                 if ($respuesta) {
-                    echo json_encode(array("mensaje" => "Proyecto eliminado", "icono" => "success"));
+                    header('Location: ?controlador=proyecto&accion=index');
                 } else {
                     echo json_encode(array("mensaje" => "Proyecto no eliminado", "icono" => "error"));
                 }
