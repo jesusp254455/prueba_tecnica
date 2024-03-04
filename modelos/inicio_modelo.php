@@ -15,10 +15,11 @@ class inicio_modelo{
     public static function vali($datos){
         $o = new conexion;
         $c = $o->obtenerCon();
-        $sql = "SELECT * FROM t_empleados WHERE email = ? AND password =  ?";
+        $sql = "SELECT * FROM t_usuarios WHERE estado = 1 and (correo = ? and contraseña =  ?)";
         $p =$c->prepare($sql);
         $vec = array($datos["email"],hash('sha256',$datos["password"]));
         $p->execute($vec);
+        // var_dump($p->fetch());
         return $p->fetch();
     }
 

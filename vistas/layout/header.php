@@ -68,12 +68,21 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="public/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION["nombres"]." ".$_SESSION["apellidos"] ?></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION["nombres"] ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo $_SESSION["nombres"]." ".$_SESSION["apellidos"] ?></h6>
+              <h6><?php echo $_SESSION["nombres"]?></h6>
+              <span> rol : <?php if ($_SESSION["rol"] == "1") {
+                echo "Administrador";
+              }else if($_SESSION["rol"] == "2"){
+                echo "Usuario";
+              }
+               else {
+                echo "Editor";
+              }
+               ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -106,6 +115,12 @@
         <a class="nav-link " href="?controlador=inicio&accion=index">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="?controlador=usuario&accion=index">
+          <i class="ri-account-box-line" style="font-size:25px;"></i>
+          <span>Usuarios</span>
         </a>
       </li>
       <li class="nav-item">

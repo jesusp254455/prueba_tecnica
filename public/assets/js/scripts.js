@@ -136,7 +136,7 @@ async function eliminar(uid, event) {
     event.preventDefault();
     let url = $(`#elin${uid}`).attr("href");
     Swal.fire({
-        title: "Desea eliminar ese usuario?",
+        title: "Desea eliminar Empleado?",
         text: "Usted no será capaz de revertir esto!",
         icon: "warning",
         showCancelButton: true,
@@ -283,3 +283,168 @@ $("#fr_actpro").submit(async function (event) {
     }
 });
 
+$("#frm_regusuario").submit(async function (event) {
+    event.preventDefault(); // Evitar el envío automático del formulario
+    
+    let url = $(this).attr("action");
+    let data = $(this).serialize();
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        if (response.ok) {
+            let respuestda = await response.json();
+            Swal.fire(
+                respuestda.mensaje,
+                '',
+                respuestda.icono
+            );
+            if (respuestda.icono === "success") {
+                $("#frm_regusuario").trigger("reset")
+            }
+           
+        } else {
+            console.error("Error en la solicitud");
+            // Aquí puedes manejar errores específicos según la respuesta del servidor
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        // Aquí puedes manejar errores de conexión, etc.
+    }
+});
+
+$("#buscarxapellidos").keyup(async function(){
+    let val = $(this).val();
+    let url = '?controlador=usuario&accion=buscar&argu='+val;
+    if (val === "") {
+        $("#impusers").html(" ");
+    } else {
+        try {
+            let respuesta = await fetch(url,{
+                method: 'GET',
+            })
+            if (respuesta.ok) {
+                let datos = await respuesta.json();
+               let res = datos.datos;
+               roles = {
+                 "1" : "administrador",
+                 "2" : "usuario",
+                 "3" : "editor"
+               }
+               tr = res.map(x=>{
+                    rol = roles[x.rol];
+                    return `
+                        <tr>
+                            <td>${x.nombres}</td>
+                            <td>${x.correo}</td>
+                            <td>${rol}</td>
+                            <td>
+                            <a href="?controlador=usuario&accion=editar&uid=${x.uid}" class="edit_user" style="font-size: 25px;"><i class="bi bi-pencil-square"></i></a>
+                            <a href="?controlador=usuario&accion=eliminar&uid=${x.uid}" class="elim_user" style="font-size: 25px;"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>  
+                    `;
+               })
+               $("#impusers").html(tr);
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }
+    
+    return false;
+})
+
+$(document).on('click','.edit_user', async function(event){
+    event.preventDefault();
+    let url = $(this).attr("href");
+    try {
+        let res = await fetch(url,{
+            method:'GET',
+        });
+        if (res.ok) {
+               let respuesta = await res.json();
+               let datos = respuesta.datose;
+               $("#nombres_editar").val(datos.nombres);
+               $("#email_editar").val(datos.correo);
+               $("#rol_editar").val(datos.rol);
+               $("#uid_usuario").val(datos.uid);
+               $("#editarusuario").modal("show");
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+    }
+})
+
+
+
+$("#frm_edtusuario").submit(async function (event) {
+    event.preventDefault(); // Evitar el envío automático del formulario
+    
+    let url = $(this).attr("action");
+    let data = $(this).serialize();
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        if (response.ok) {
+            let respuestda = await response.json();
+            Swal.fire(
+                respuestda.mensaje,
+                '',
+                respuestda.icono
+            );
+            $("#buscarxapellidos").val("");
+            $("#impusers").html("");
+        } else {
+            console.error("Error en la solicitud");
+            // Aquí puedes manejar errores específicos según la respuesta del servidor
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        // Aquí puedes manejar errores de conexión, etc.
+    }
+});
+
+$(document).on('click', '.elim_user', async function(event){
+    event.preventDefault();
+    let url = $(this).attr("href");
+    let elemento = $(this);
+    Swal.fire({
+        title: "Desea eliminar ese usuario?",
+        text: "Usted no será capaz de revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Eliminar!"
+    }).then(async (result) => { // Hacer la función dentro de then() asíncrona
+        if (result.isConfirmed) {
+            try {
+                let respuesta = await fetch(url, {
+                    method: 'GET'
+                });
+
+                if (respuesta.ok) {
+                    let data = await respuesta.json();
+                    Swal.fire(data.mensaje, '', data.icono);
+                    elemento.closest("tr").remove();
+                } else {
+                    console.error('Error en la respuesta del servidor:', respuesta.status);
+                    Swal.fire("Error", "Hubo un error al procesar su solicitud.", "error");
+                }
+            } catch (error) {
+                console.error("Error al eliminar el usuario:", error);
+                Swal.fire("Error", "Hubo un error al procesar su solicitud.", "error");
+            }
+        }
+    });
+})

@@ -23,9 +23,10 @@ class inicio_controlador {
             $datos["email"] = $_POST["email"];
             $datos["password"] = $_POST["password"];
             $r = inicio_modelo::vali($datos);
+
             if ($r > 0) {
                 $_SESSION["nombres"] = $r["nombres"];
-                $_SESSION["apellidos"] = $r["apellidos"];
+                $_SESSION["rol"] = $r["rol"];
                 $_SESSION["id"] = $r["id"];
                 header("location: ?controlador=inicio&accion=index");
             } else {

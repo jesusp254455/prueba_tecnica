@@ -79,15 +79,11 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-6">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label for="" class="form-label">Digite su Email</label>
                                         <input type="email" class="form-control" name="email" id="email" required>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <label for="" class="form-label">Digite su contraseña</label>
-                                    <input type="password" class="form-control" name="password" id="password" required>
                                 </div>
                             </div>
                         </div>
