@@ -8,3 +8,6 @@ PROYECTO DE PRUEBA TECNICA
 
 2 arquitectura
 este proyecto esta hecho en mvc que es un patron de arquitectura de software el cual significa modelo vista controlador
+
+Usuario: administrador@gmail.com
+contraseña : 1234567
